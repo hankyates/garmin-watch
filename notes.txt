@@ -1,0 +1,51 @@
+Sailing Watch - Connect IQ Data Fields
+========================================
+
+Two data fields for Garmin Instinct 2 (and similar devices)
+that use the watch's navigation and compass to compute
+sailing metrics.
+
+Projects
+--------
+  bearing-diff/   - Bearing Diff (difference between nav bearing and heading)
+  vmg/            - VMG (Velocity Made Good toward the mark)
+
+Formulas
+--------
+  Bearing Diff   = navBearing - heading  (degrees, normalized to +/-180)
+  VMG            = cos(navBearing - heading) * speedOverGround  (knots)
+
+  Both use:
+    info.bearing         - bearing to the navigation waypoint (radians)
+    info.currentHeading  - compass heading (radians)
+    info.currentSpeed    - speed over ground (m/s)
+
+  Requires an active navigation course/waypoint on the watch,
+  otherwise fields show "---".
+
+Setup
+-----
+  1. Open a project folder (bearing-diff/ or vmg/) in VS Code
+  2. Ctrl+Shift+P -> "Monkey C: Edit Products" -> select your device
+  3. Ctrl+Shift+P -> "Monkey C: Build for Device" -> pick device
+
+Install
+-------
+  Copy the .prg file to the GARMIN/Apps folder on the watch via USB:
+    \\wsl.localhost\Ubuntu\home\hank\projects\sailing-watch\bearing-diff\bearingdiff.prg
+    \\wsl.localhost\Ubuntu\home\hank\projects\sailing-watch\vmg\vmg.prg
+
+On the Watch
+------------
+  Start an activity -> hold Menu -> Data Screens -> Add Data Screen
+  -> Connect IQ -> pick "Bearing Diff" or "VMG"
+
+To Use
+------
+  Set a navigation course/waypoint on the watch first.
+  The fields show live data during the activity.
+
+Resume This Session
+-------------------
+  cd /home/hank/projects/sailing-watch
+  opencode .

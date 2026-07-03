@@ -1,0 +1,8 @@
+*.prg
+*.prg.debug.xml
+gen/
+internal-mir/
+mir/
+bin/
+connectiq-sdk-manager-linux/
+connectiq-sdk-manager-windows/
